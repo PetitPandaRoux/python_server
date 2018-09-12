@@ -19,7 +19,6 @@ class Restaurant(Base):
     name = Column(String(80), nullable = False)
     
 
-
 class MenuItem(Base): 
 
     __tablename__ = 'menu_item'
@@ -33,7 +32,6 @@ class MenuItem(Base):
     restaurant = relationship(Restaurant)
 
 engine = create_engine(
-    'sqlite:///restaurantmenu.db'
-)
+    'sqlite:///restaurantmenu.db')
 
 Base.metadata.create_all(engine)
