@@ -1,5 +1,10 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+
 import cgi
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from database_setup import Base, Restaurant, MenuItem
 
 class WebServerHandler (BaseHTTPRequestHandler) :
 
@@ -16,7 +21,7 @@ class WebServerHandler (BaseHTTPRequestHandler) :
             message += "</body></html>"
             self.wfile.write(message)
             print (message)
-            return
+            
 
         if self.path.endswith("/hola"):
             self.send_response(200)
@@ -30,7 +35,26 @@ class WebServerHandler (BaseHTTPRequestHandler) :
             message += "</body></html>"
             self.wfile.write(message)
             print (message)
-            return
+            
+
+        if self.path.endswith("/restaurant"):
+            self.send_response(200)
+            self.send_header('content-type', 'text/html')
+            self.end_headers()
+
+            engine = create_engine('sqlite:///restaurantmenu.db')
+            Base.metadata.bind = engine
+            DBSession = sessionmaker(bind = engine)
+            session = DBSession()
+            restaurant_list = session.query(Restaurant).all()
+            message = ""
+            message += "<html><body>"
+            message = "<ul>"
+            for restaurant in restaurant_list:
+                message += "<li>"+restaurant.name+"</li>" 
+            message +="</ul>"
+            message += "</body></html>"
+            self.wfile.write(message)
 
         else :
             self.send_error(404, "File pas trouve %s" %self.path)
