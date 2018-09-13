@@ -2,9 +2,15 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 import cgi
 
+from database_setup import Base, Restaurant, MenuItem
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, MenuItem
+
+#Create Session and connect to database
+engine = create_engine('sqlite:///restaurantmenu.db')
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind = engine)
+session = DBSession()
 
 class WebServerHandler (BaseHTTPRequestHandler) :
 
@@ -37,22 +43,20 @@ class WebServerHandler (BaseHTTPRequestHandler) :
             print (message)
             
 
-        if self.path.endswith("/restaurant"):
+        if self.path.endswith("/restaurants"):
             self.send_response(200)
             self.send_header('content-type', 'text/html')
             self.end_headers()
 
-            engine = create_engine('sqlite:///restaurantmenu.db')
-            Base.metadata.bind = engine
-            DBSession = sessionmaker(bind = engine)
-            session = DBSession()
+       
             restaurant_list = session.query(Restaurant).all()
             message = ""
             message += "<html><body>"
-            message = "<ul>"
             for restaurant in restaurant_list:
-                message += "<li>"+restaurant.name+"</li>" 
-            message +="</ul>"
+                message += restaurant.name
+                message += "</br>"
+                message += "<a href='#'>Edit</a>"
+                message += "<a href='#'> Delete</a><br><br>" 
             message += "</body></html>"
             self.wfile.write(message)
 
