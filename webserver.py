@@ -41,7 +41,7 @@ class WebServerHandler (BaseHTTPRequestHandler) :
             message += "</body></html>"
             self.wfile.write(message)
             print (message)
-            
+            return
 
         if self.path.endswith("/restaurants"):
             self.send_response(200)
@@ -52,6 +52,7 @@ class WebServerHandler (BaseHTTPRequestHandler) :
             restaurant_list = session.query(Restaurant).all()
             message = ""
             message += "<html><body>"
+            message += "<p><a href = '/restaurants/new'/'>Make a new restaurant</a></p>"
             for restaurant in restaurant_list:
                 message += restaurant.name
                 message += "</br>"
@@ -59,6 +60,17 @@ class WebServerHandler (BaseHTTPRequestHandler) :
                 message += "<a href='#'> Delete</a><br><br>" 
             message += "</body></html>"
             self.wfile.write(message)
+
+        if self.path.endswith("/restaurants/new"):
+            self.send_response(200)
+            self.send_header('content-type', 'text/html')
+            self.end_headers()
+
+            message = "<html><body>"
+            message += "Make a new restaurant"
+            message +="</body></html>"
+            self.wfile.write(message)
+            return
 
         else :
             self.send_error(404, "File pas trouve %s" %self.path)
