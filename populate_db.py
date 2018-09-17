@@ -15,3 +15,16 @@ session.add(cheesepizza)
 session.commit()
 
 print(session.query(Restaurant).all())
+
+# NECESSARY SESSION
+#engine = create_engine('sqlite:///restaurantmenu.db')
+#Base.metadata.bind = engine
+#DBSession = sessionmaker(bind = engine)
+#session = DBSession()
+
+# CREATE DOC
+# newRestaurant = Restaurant(name = "Pizza palazio")
+# session.add(newRestaurant)
+# session.commit()
+#
+#
