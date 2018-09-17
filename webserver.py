@@ -15,66 +15,41 @@ session = DBSession()
 class WebServerHandler (BaseHTTPRequestHandler) :
 
     def do_GET(self):
-        if self.path.endswith("/hello"):
-            self.send_response(200)
-            self.send_header('content-type', 'text/html')
-            self.end_headers()
+        try:
+     
+            if self.path.endswith("/restaurants"):
+                self.send_response(200)
+                self.send_header('content-type', 'text/html')
+                self.end_headers()
 
-            message = ""
-            message += "<html><body>"
-            message += "<h1>Hello!</h1>"
-            message += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
-            message += "</body></html>"
-            self.wfile.write(message)
-            print (message)
-            
+        
+                restaurant_list = session.query(Restaurant).all()
+                message = ""
+                message += "<html><body>"
+                message += "<p><a href = '/restaurants/new'/'>Make a new restaurant</a></p>"
+                for restaurant in restaurant_list:
+                    message += restaurant.name
+                    message += "</br>"
+                    message += "<a href='#'>Edit</a>"
+                    message += "<a href='#'> Delete</a><br><br>" 
+                message += "</body></html>"
+                self.wfile.write(message)
 
-        if self.path.endswith("/hola"):
-            self.send_response(200)
-            self.send_header('content-type', 'text/html')
-            self.end_headers()
+            if self.path.endswith("/restaurants/new"):
+                self.send_response(200)
+                self.send_header('Content-type', 'text/html')
+                self.end_headers()
 
-            message = ""
-            message += "<html><body>"
-            message += "<h1>&#161 Hola !</h1>"
-            message += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
-            message += "</body></html>"
-            self.wfile.write(message)
-            print (message)
-            return
-
-        if self.path.endswith("/restaurants"):
-            self.send_response(200)
-            self.send_header('content-type', 'text/html')
-            self.end_headers()
-
-       
-            restaurant_list = session.query(Restaurant).all()
-            message = ""
-            message += "<html><body>"
-            message += "<p><a href = '/restaurants/new'/'>Make a new restaurant</a></p>"
-            for restaurant in restaurant_list:
-                message += restaurant.name
-                message += "</br>"
-                message += "<a href='#'>Edit</a>"
-                message += "<a href='#'> Delete</a><br><br>" 
-            message += "</body></html>"
-            self.wfile.write(message)
-
-        if self.path.endswith("/restaurants/new"):
-            self.send_response(200)
-            self.send_header('content-type', 'text/html')
-            self.end_headers()
-
-            message = "<html><body>"
-            message += "Make a new restaurant"
-            message +="</body></html>"
-            self.wfile.write(message)
-            return
-
-        else :
+                message = "<html><body>"
+                message += "<h1>Make a new restaurant</h1>"
+                message += '''<form method='POST' enctype='multipart/form-data' action='/restaurants/new'>Create new restaurant <input name="add-restaurant" placeholder="choose a name" type="text" ><input type="submit" value="Create"> </form>'''
+                message +="</body></html>"
+                self.wfile.write(message)
+                print (message)
+                return
+        except IOError:
             self.send_error(404, "File pas trouve %s" %self.path)
-    
+
     def do_POST(self):
         try :
             self.send_response(301)
@@ -82,19 +57,24 @@ class WebServerHandler (BaseHTTPRequestHandler) :
             self.end_headers()
 
             ctype, pdict = cgi.parse_header(
-                self.headers.getheader('content-type'))
+                self.headers.getheader('Content-type'))
             if ctype == 'multipart/form-data':
                 fields = cgi.parse_multipart(self.rfile, pdict)
-                messagecontent = fields.get('message')
-            
-            output = ""
-            output += "<html><body>"
-            output += "<h2> Okay, how about this : </h2>"
-            output += "<h1> %s </h1>" %messagecontent[0]
-            output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
-            output += "</html></body>"
-            self.wfile.write(output)
-            print (output)
+                add_restaurant_name = fields.get('add-restaurant')
+        
+                new_Restaurant_Name = Restaurant(name = add_restaurant_name[0])
+                session.add(new_Restaurant_Name)
+                session.commit()
+
+                output = ""
+                output += "<html><body>"
+                output += "<h2> Welcome to the new restaurant: </h2>"
+                output += "<h1> %s </h1>" %add_restaurant_name[0]
+                output += "<h2><a href='/restaurants'>Go back to restaurant list</a></h2>"
+                output += "</html></body>"
+                self.wfile.write(output)
+                print (output)
+
         except :
             pass
 

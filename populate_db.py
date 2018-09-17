@@ -27,4 +27,9 @@ print(session.query(Restaurant).all())
 # session.add(newRestaurant)
 # session.commit()
 #
+# UPDATE DOC
 #
+# cible = session.query(restaurant).filter_by(name='').one()
+# cible.price = newPrice
+# session.add(cible)
+# session.commit()
