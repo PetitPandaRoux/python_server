@@ -12,7 +12,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 @app.route('/')
-@app.route('/restaurants')
+@app.route('/restaurants/')
 def all_restaurants():
     restaurants = session.query(Restaurant).all()
     output = ''
@@ -45,9 +45,19 @@ def new_menu_item(restaurant_id):
     else :
         return render_template('new-menu-item.html', restaurant_id = restaurant_id)
 
-@app.route('/restaurants/<int:restaurant_id>/editMenu/<int:menu_id>/')
+@app.route('/restaurants/<int:restaurant_id>/editMenu/<int:menu_id>/',methods = ['GET','POST'])
 def edit_menu_item(restaurant_id, menu_id):
-    return "edit Menu"
+    item = session.query(MenuItem).filter_by(id=menu_id).one()
+    if request.method == 'POST':
+         item.name = request.form['name']
+         item.price = request.form['price']
+         item.description = request.form['description']
+         item.course = request.form['course']
+         session.add(item)
+         session.commit()
+         return redirect ((url_for('restaurant_menu', restaurant_id = restaurant_id)))
+    else :
+        return render_template('edit-menu-item.html', restaurant_id = restaurant_id, menu_id = menu_id, item = item)
 
 @app.route('/restaurants/<int:restaurant_id>/delete/<int:menu_id>/')
 def deleteMenuItem(restaurant_id, menu_id):
