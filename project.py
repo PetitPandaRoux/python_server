@@ -46,7 +46,7 @@ def restaurant_Menu(restaurant_id):
 
     output += '<h2> Create New Menu Item</h2></br>'
     output += "<a href = /restaurants/%s/newItems> Create new item </a>"%restaurant.id
- 
+
     return output
 
 @app.route('/restaurants/<int:restaurant_id>/new')
