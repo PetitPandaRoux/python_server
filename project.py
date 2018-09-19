@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
@@ -34,8 +34,6 @@ def restaurant_Menu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id)
     return render_template('menu.html', restaurant = restaurant, items= items)
-
-
 
 @app.route('/restaurants/<int:restaurant_id>/new')
 def new_menu_item(restaurant_id):
