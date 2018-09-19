@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
@@ -42,6 +42,7 @@ def new_menu_item(restaurant_id):
         new_item = MenuItem(name = request.form['name'], course = request.form['course'], description = request.form['description'], price = request.form['price'],restaurant_id = restaurant_id)
         session.add(new_item)
         session.commit()
+        flash("new menu item created!")
         return redirect(url_for('restaurant_menu', restaurant_id = restaurant_id)) 
 # l'argument passee par get est ensuite passee au template
     else :
@@ -57,6 +58,7 @@ def edit_menu_item(restaurant_id, menu_id):
          item.course = request.form['course']
          session.add(item)
          session.commit()
+         flash(item.name +" has been edited!")
          return redirect ((url_for('restaurant_menu', restaurant_id = restaurant_id)))
     else :
         return render_template('edit-menu-item.html', restaurant_id = restaurant_id, menu_id = menu_id, item = item)
@@ -67,11 +69,13 @@ def delete_menu_item(restaurant_id, menu_id):
     if request.method == 'POST':
         session.delete(item_to_delete)
         session.commit()
+        flash("the item " + item_to_delete.name +" was deleted !")
         return redirect ((url_for('restaurant_menu', restaurant_id = restaurant_id)))
     else:
         return render_template('delete-menu-item.html', restaurant_id = restaurant_id, menu_id = menu_id, item = item_to_delete)
 
 if __name__ == '__main__':
+    app.secret_key = "super_secret_key"
     app.debug = True
-app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
 
