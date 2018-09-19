@@ -33,3 +33,8 @@ print(session.query(Restaurant).all())
 # cible.price = newPrice
 # session.add(cible)
 # session.commit()
+#
+# DELETE DOC
+#    my_restaurant_query = session.query(Restaurant).filter_by(id=restaurantIDPath).one()
+#                session.delete(my_restaurant_query)
+#                session.commit()
