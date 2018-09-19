@@ -19,14 +19,6 @@ def all_restaurants():
     for restaurant in restaurants :
         output += ''
         output += "<h2>" + restaurant.name + "</h2>"
-        items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id)
-        for i in items:
-            output += i.name
-            output += '<br>'
-            output += i.price
-            output += '<br>'
-            output += i.description
-            output += '<br><br>'
     return output
 
 @app.route('/restaurants/<int:restaurant_id>/')
@@ -59,7 +51,7 @@ def edit_menu_item(restaurant_id, menu_id):
          session.add(item)
          session.commit()
          flash(item.name +" has been edited!")
-         return redirect ((url_for('restaurant_menu', restaurant_id = restaurant_id)))
+         return redirect (url_for('restaurant_menu', restaurant_id = restaurant_id))
     else :
         return render_template('edit-menu-item.html', restaurant_id = restaurant_id, menu_id = menu_id, item = item)
 
@@ -70,12 +62,12 @@ def delete_menu_item(restaurant_id, menu_id):
         session.delete(item_to_delete)
         session.commit()
         flash("the item " + item_to_delete.name +" was deleted !")
-        return redirect ((url_for('restaurant_menu', restaurant_id = restaurant_id)))
+        return redirect (url_for('restaurant_menu', restaurant_id = restaurant_id))
     else:
         return render_template('delete-menu-item.html', restaurant_id = restaurant_id, menu_id = menu_id, item = item_to_delete)
 
 if __name__ == '__main__':
     app.secret_key = "super_secret_key"
     app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, threaded = False)
 
