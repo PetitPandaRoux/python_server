@@ -1,0 +1,24 @@
+body {
+    background-color: #00A388;
+}
+
+h1 {
+    color :white;
+}
+
+.menu-item{
+    display: inline-block;
+    margin:5px;
+}
+
+/*
+color uses :
+#FF6138 orange
+#FFFF9D jaune pale
+#BEEB9F vert jaune pale
+#79BD8F vert pale
+#00A388 vert turquoise
+
+"{{ url_for('static', filename='style.css') }}"
+*/
+
