@@ -70,7 +70,7 @@ def edit_menu_item(restaurant_id, menu_id):
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/delete/')
 def delete_menu_item(restaurant_id, menu_id):
-    return "delete menu item"
+    return render_template('delete-menu-item.html', restaurant_id = restaurant_id, menu_id = menu_id, item = item)
 
 
 if __name__ == '__main__':
