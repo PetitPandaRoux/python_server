@@ -17,6 +17,7 @@ session = DBSession()
 #Fake Restaurants
 restaurant = {'name': 'The CRUDdy Crab', 'id': '1'}
 
+#restaurants = []
 restaurants = [{'name': 'The CRUDdy Crab', 'id': '1'}, {'name':'Blue Burgers', 'id':'2'},{'name':'Taco Hut', 'id':'3'}]
 
 
@@ -26,16 +27,16 @@ item =  {'name':'Cheese Pizza','description':'made with fresh cheese','price':'$
 
 @app.route('/')
 @app.route('/restaurants/')
-def show_restaurant():
+def show_restaurants():
     return render_template('restaurants.html', restaurants = restaurants, items= items)
 
 @app.route('/restaurant/new/')
-def create_restaurant():
-    return "create a new restaurant"
+def new_restaurant():
+    return render_template('new-restaurant.html')
 
 @app.route('/restaurant/<int:restaurant_id>/edit/')
 def edit_restaurant(restaurant_id):
-    return "edit restaurant"
+    return render_template('edit-restaurant.html')
 
 @app.route('/restaurant/<int:restaurant_id>/delete/')
 def delete_restaurant(restaurant_id):
@@ -48,7 +49,7 @@ def show_menu(restaurant_id):
 
 
 @app.route('/restaurant/<int:restaurant_id>/menu/new/')
-def create_menu_item(restaurant_id):
+def new_menu_item(restaurant_id):
     return "create new menu item"
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit/')
