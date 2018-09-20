@@ -22,7 +22,7 @@ restaurants = [{'name': 'The CRUDdy Crab', 'id': '1'}, {'name':'Blue Burgers', '
 
 
 #Fake Menu Items
-items = [ {'name':'Cheese Pizza', 'description':'made with fresh cheese', 'price':'$5.99','course' :'Entree', 'id':'1'}, {'name':'Chocolate Cake','description':'made with Dutch Chocolate', 'price':'$3.99', 'course':'Dessert','id':'2'},{'name':'Caesar Salad', 'description':'with fresh organic vegetables','price':'$5.99', 'course':'Entree','id':'3'},{'name':'Iced Tea', 'description':'with lemon','price':'$.99', 'course':'Beverage','id':'4'},{'name':'Spinach Dip', 'description':'creamy dip with fresh spinach','price':'$1.99', 'course':'Appetizer','id':'5'} ]
+items = [ {'name':'Cheese Pizza', 'description':'made with fresh cheese', 'price':'$5.99','course' :'Entree', 'id':'1'}, {'name':'Chocolate Cake','description':'made with Dutch Chocolate', 'price':'$3.99', 'course':'Dessert','id':'2'},{'name':'Caesar Salad', 'description':'with fresh organic vegetables','price':'$5.99', 'course':'Entree','id':'3'},{'name':'Iced Tea', 'description':'with lemon','price':'$0.99', 'course':'Beverage','id':'4'},{'name':'Spinach Dip', 'description':'creamy dip with fresh spinach','price':'$1.99', 'course':'Appetizer','id':'5'} ]
 item =  {'name':'Cheese Pizza','description':'made with fresh cheese','price':'$5.99','course' :'Entree'}
 
 @app.route('/')
@@ -45,7 +45,19 @@ def delete_restaurant(restaurant_id):
 @app.route('/restaurant/<int:restaurant_id>/')
 @app.route('/restaurant/<int:restaurant_id>/menu/')
 def show_menu(restaurant_id):
-    return render_template('menu.html', restaurant = restaurant_id, items= items)
+    def select_course_type(menus, course_type):
+        new_list = []
+        for item in menus :
+            if item['course'] == course_type:
+                new_list.append(item)
+        return new_list
+    
+    appetizers = select_course_type(items,'Appetizer')
+    beverages = select_course_type(items,'Beverage')
+    entrees = select_course_type(items, 'Entree')
+    desserts = select_course_type(items, 'Dessert')
+
+    return render_template('menu.html', restaurant = restaurant, restaurant_id = restaurant_id, appetizers= appetizers, beverages = beverages, entrees = entrees, desserts = desserts)
 
 
 @app.route('/restaurant/<int:restaurant_id>/menu/new/')
