@@ -3,17 +3,25 @@
       <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
     </head>
   <body>
-    <h1>New Menu Item</h1>
-    <form action="{{ url_for('new_menu_item', restaurant_id = restaurant_id)}}" method = 'POST'>
-      <label for='name'>Name: </label><br>
-      <input type = 'text' size = '30' name = 'name'><br>
-      <label for='course'>Course:</label><br>
-      <input type = 'text' size = '30' name = 'course'><br>
-      <label for'description'>Description</label><br>
-      <input type = 'text' size = '30' name = 'description'><br>
-      <label for='price'>Price</label><br>
-      <input type = 'text' size = '10' name = 'price' placeholder = '$1.99'><br>
-      <input type = 'submit' value = "Create">
-    </form>
+    <div class='page'>
+      <h1>New Menu Item for <br> {{restaurant.name}}</h1>
+      <form class='form--new' action="{{ url_for('new_menu_item', restaurant_id = restaurant_id)}}" method = 'POST'>
+        <label for='name'>Name: </label><br>
+        <input type = 'text' size = '30' name = 'name'><br>
+        <label for='course'>Course type :</label><br>
+        <select name = 'course'>
+            <option value="Appetizer">Appetizer</option>
+            <option value="Entree">Entree</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Beverage">Beverage</option>
+          </select> <br>
+        <label for'description'>Description</label><br>
+        <input type = 'text' size = '30' name = 'description'><br>
+        <label for='price'>Price</label><br>
+        <input type = 'text' size = '10' name = 'price' placeholder = '$1.99'><br><br>
+        <input type = 'submit' value = "Create">
+        <a href = "{{ url_for('show_menu', restaurant_id = restaurant.id) }}">Cancel</a>
+      </form>
+    </div>
   </body>
 </html>
