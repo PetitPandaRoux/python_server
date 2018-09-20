@@ -17,7 +17,7 @@
 
         {% for restaurant in restaurants %}
         <div class='container'>
-          <div class='restaurant__name'><a href = "{{ url_for('show_menu', restaurant_id = restaurant.id )}}"}></a>{{restaurant.name}}</a></div> 
+          <div class='restaurant__name'><a href = "{{ url_for('show_menu', restaurant_id = restaurant.id )}}"}>{{restaurant.name}}</a></div> 
           <div class='container'>
           <a class='restaurant__button--edit' href = "{{ url_for('edit_restaurant', restaurant_id = restaurant.id )}}"> <i class='material-icons' style='color:black;'>edit</i><br>Edit</a>    
           <a class='restaurant__button--delete' href = "{{ url_for('delete_restaurant', restaurant_id = restaurant.id )}}"> <i class='material-icons';>delete_forever</i><br>Delete</a>  
