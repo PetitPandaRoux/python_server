@@ -8,6 +8,18 @@
   <body>
     <div class='page'>
       <h1>List of restaurants</h1>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+  
+        <ul>
+          {% for message in messages %}
+            <li><strong>{{message}}</strong></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+      {% endwith %}
+      
       <div class='restaurant'>
         {% if restaurants == [] %}
           <div class='container'>

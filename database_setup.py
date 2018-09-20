@@ -18,6 +18,13 @@ class Restaurant(Base):
     id = Column(Integer, primary_key = True)
     name = Column(String(80), nullable = False)
     
+    @property
+    def serialize(self):
+        #Returns object data in easily serializable format
+        return{
+            'name' : self.name,
+            'id' : self.id,     
+        }
 
 class MenuItem(Base): 
 
