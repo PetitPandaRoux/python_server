@@ -10,9 +10,8 @@ html {
 
 body {
     background-color: #00A388;
-    margin-right:5%;
-    margin-left:5%;
-    height: 100%;
+    margin-right:4%;
+    margin-left:4%;
     text-align: center;
 }
 
@@ -220,9 +219,8 @@ p.center--vertically{
 
 @media screen and (min-width:800px){
     body {
-        margin-right:20%;
-        margin-left:20%;
-        height: 100%;
+        margin-right:16%;
+        margin-left:16%;
         text-align: center;
     }
 
