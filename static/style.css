@@ -1,14 +1,110 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+html {
+    background-color: #BEEB9F;
+}
+
+
 body {
     background-color: #00A388;
+    margin-right:5%;
+    margin-left:5%;
+    height: 100%;
+    text-align: center;
 }
 
 h1 {
+    margin-bottom: 2rem;
     color :white;
+    font-size : 1.5rem;
+}
+
+@media screen and (min-width:800px){
+    body {
+        margin-right:20%;
+        margin-left:20%;
+        height: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size:3rem;
+    }
+}
+
+.page {
+    padding:1rem;
 }
 
 .menu-item{
     display: inline-block;
-    margin:5px;
+}
+
+.restaurant {
+    padding : 1 rem;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:10px;
+    background-color:#79BD8F;
+    font-size:1.5rem;
+    justify-content: space-between;
+    border-radius:20px;
+}
+
+.restaurant__name {
+    background-color:#79BD8F;
+    margin :20px;
+    padding:20px 0 20px 10px;
+    text-align: left;
+    font-size:1.5rem;
+
+}
+
+.restaurant__button--edit {
+    background-color:#FFFF9D;
+    width:40px;
+    height : auto;
+    border-radius:10px;
+    font-size:1rem;
+    text-decoration:none;
+    color : black;
+    padding:20px 20px 20px 20px;
+    text-align: center;
+    margin :10px;
+}
+
+.restaurant__button--delete {
+    background-color:#FF6138;
+    width:40px;
+    height : auto;
+    border-radius:10px;
+    font-size:1rem;
+    text-decoration:none;
+    color :white;
+    padding:20px 20px 20px 20px;
+    text-align: center;
+    margin :10px;
+}
+
+.restaurant__button--new {
+    background-color:#79BD8F;
+    margin :20px;
+    text-align: left;
+    font-size:1.5rem;
+    width:100%;
+    height : auto;
+    font-size:1rem;
+    text-decoration:none;
+    color : black;
+    text-align: center;
 }
 
 /*
