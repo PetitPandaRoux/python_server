@@ -27,17 +27,17 @@
             {% for appetizer in appetizers %}
               <div class='menu--container'>
                 <div class='item--name'>
-                {{appetizer.name}}
-                <br>
-                <span class = 'item--description'>{{appetizer.description}}</span>
-                </div>
+                  {{appetizer.name}}
+                  <br>
+                  <span class = 'item--description'>{{appetizer.description}}</span>
+                  </div>
                 <div class = 'line'>.............................................</div>
                 <div class='item--price'>{{appetizer.price}}</div>
-                <div class='item__button--edit'>
-                  <a  class='color--black no-style' href = "{{ url_for('edit_menu_item', restaurant_id = restaurant.id, menu_id = appetizer.id )}}"> <i class='material-icons' style='color:black;'></i><br><span class = 'invisible'>Edit</span></a>
+                <div class='item__button bg--main-yellow'>
+                  <a  class='color--black no-style' href = "{{ url_for('edit_menu_item', restaurant_id = restaurant.id, menu_id = appetizer.id )}}"> <i class='material-icons' style='color:black;'>edit</i></a>
                 </div>
-                <div class='item__button--delete'>
-                  <a  class='color--white no-style' href = "{{ url_for('delete_menu_item', restaurant_id = restaurant.id, menu_id = appetizer.id )}}"> <i class='material-icons';>delete_forever</i><br><span class = 'invisible'>Delete</span></a>  
+                <div class='item__button bg--main-orange'>
+                  <a  class='color--white no-style' href = "{{ url_for('delete_menu_item', restaurant_id = restaurant.id, menu_id = appetizer.id )}}"> <i class='material-icons';>delete_forever</i></a>  
                 </div>
               </div>
             {% endfor %}
@@ -48,18 +48,18 @@
           {% for entree in entrees %}
             <div class='menu--container'>
               <div class='item--name'>
-              {{entree.name}}
-              <br>
-              <span class = 'item--description'>{{entree.description}}</span>
-              </div>
+                {{entree.name}}
+                <br>
+                <span class = 'item--description'>{{entree.description}}</span>
+                </div>
               <div class = 'line'>.............................................</div>
               <div class='item--price'>{{entree.price}}</div>
-              <div class='item__button--edit'>
+              <div class='item__button bg--main-yellow'>
                   <a  class='color--black no-style' href = "{{ url_for('edit_menu_item', restaurant_id = restaurant.id, menu_id = entree.id )}}"> <i class='material-icons' style='color:black;'>edit</i></a>
                 </div>
-                <div class='item__button--delete'>
+                <div class='item__button bg--main-orange'>
                   <a  class='color--white no-style' href = "{{ url_for('delete_menu_item', restaurant_id = restaurant.id, menu_id = entree.id )}}"> <i class='material-icons';>delete_forever</i></a>  
-                </div>
+                </div> 
             </div>
           {% endfor %}
         {% endif %}
@@ -69,16 +69,16 @@
           {% for dessert in desserts %}
             <div class='menu--container'>
               <div class='item--name'>
-              {{dessert.name}}
-              <br>
-              <span class = 'item--description'>{{dessert.description}}</span>
+                {{dessert.name}}
+                <br>
+                <span class = 'item--description'>{{dessert.description}}</span>
               </div>
               <div class = 'line'>.............................................</div>
               <div class='item--price'>{{dessert.price}}</div>
-              <div class='item__button--edit'>
+              <div class='item__button bg--main-yellow'>
                   <a  class='color--black no-style' href = "{{ url_for('edit_menu_item', restaurant_id = restaurant.id, menu_id = dessert.id )}}"> <i class='material-icons' style='color:black;'>edit</i></a>
                 </div>
-                <div class='item__button--delete'>
+                <div class='item__button bg--main-orange'>
                   <a  class='color--white no-style' href = "{{ url_for('delete_menu_item', restaurant_id = restaurant.id, menu_id = dessert.id )}}"> <i class='material-icons';>delete_forever</i></a>  
                 </div>
             </div>
@@ -90,16 +90,16 @@
           {% for beverage in beverages %}
             <div class='menu--container'>
               <div class='item--name'>
-              {{beverage.name}}
-              <br>
-              <span class = 'item--description'>{{beverage.description}}</span>
+                {{beverage.name}}
+                <br>
+                <span class = 'item--description'>{{beverage.description}}</span>
               </div>
               <div class = 'line'>.............................................</div>
               <div class='item--price'>{{beverage.price}}</div>
-              <div class='item__button--edit'>
+              <div class='item__button bg--main-yellow'>
                 <a  class='color--black no-style' href = "{{ url_for('edit_menu_item', restaurant_id = restaurant.id, menu_id = beverage.id )}}"> <i class='material-icons' style='color:black;'>edit</i></a>
               </div>
-              <div class='item__button--delete'>
+              <div class='item__button bg--main-orange'>
                 <a  class='color--white no-style' href = "{{ url_for('delete_menu_item', restaurant_id = restaurant.id, menu_id = beverage.id )}}"> <i class='material-icons';>delete_forever</i></a>  
               </div>
             </div>
