@@ -59,34 +59,19 @@ select{
     padding:20px 0 20px 10px;
     text-align: left;
     font-size:1.5rem;
-
 }
 
-.restaurant__button--edit {
-    background-color:#FFFF9D;
-    width:40px;
+.restaurant__button{
+    width:20px;
     height : auto;
     border-radius:10px;
     font-size:1rem;
     text-decoration:none;
-    color : black;
-    padding:20px 20px 20px 20px;
     text-align: center;
-    margin :10px;
+    padding:10px;
+    margin :5px;
 }
 
-.restaurant__button--delete {
-    background-color:#FF6138;
-    width:40px;
-    height : auto;
-    border-radius:10px;
-    font-size:1rem;
-    text-decoration:none;
-    color :white;
-    padding:20px 20px 20px 20px;
-    text-align: center;
-    margin :10px;
-}
 
 .restaurant__button--new {
     background-color:#79BD8F;
@@ -146,6 +131,10 @@ select{
     display:none;
 }
 
+.invisible {
+    display:none;
+}
+
 .item--price {
     background-color: white;
     text-align:left;
@@ -192,8 +181,8 @@ select{
     font-size:1rem;
     color : black;
     text-align: center;
-    margin-left:10px;
     padding:5px;
+    margin-left:5px;
 
 }
 
@@ -203,6 +192,18 @@ select{
 
 .color--black{
     color : black;
+}
+
+.bg--main-orange{
+    background-color:#FF6138;
+}
+
+.bg--main-blue{
+    background-color:#79BD8F;
+}
+
+.bg--main-yellow{
+    background-color:#FFFF9D;
 }
 
 .no-style{
@@ -231,6 +232,22 @@ p.center--vertically{
     .line{
         display:block;
     }
+
+    .invisible {
+        display:block;
+    }
+
+    .restaurant__button {
+        width:40px;
+        height : auto;
+        border-radius:10px;
+        font-size:1rem;
+        text-decoration:none;
+        padding:20px 20px 20px 20px;
+        text-align: center;
+        margin :10px;
+    }
+    
 }
 
 /*
